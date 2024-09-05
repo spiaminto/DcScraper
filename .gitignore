@@ -1,3 +1,7 @@
+### CUSTOM ###
+.Memo
+application-*.properties
+
 HELP.md
 .gradle
 build/
