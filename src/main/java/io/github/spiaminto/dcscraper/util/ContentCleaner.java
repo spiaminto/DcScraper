@@ -12,6 +12,7 @@ public class ContentCleaner {
      * @return cleanContent
      */
     public static String cleanContent(String rawContent) {
+        if (rawContent == null) return "null"; // null 처리
         // 제목 +  내용만 추출
         Element rawElement = Jsoup.parse(rawContent);
         rawElement.select("#dcappfooter").remove(); // 앱푸터 삭제

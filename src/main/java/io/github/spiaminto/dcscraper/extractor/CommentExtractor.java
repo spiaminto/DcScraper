@@ -54,7 +54,7 @@ public class CommentExtractor {
                 } else {
                     // 답글
                     long targetId;
-                    if (liElementPrev == null || liElementPrev.select(".cmtInfo").isEmpty()) {
+                    if (liElementPrev == null || liElementPrev.select(props.getCommentNumSelector()).isEmpty()) {
                         // 이전 댓글이 삭제되었거나, 댓글이 아닌 경우 targetNum 을 -1 로 설정
                         targetId = -1;
                     } else {

@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 
 public interface DcPageFinder {
 
-    void findFirstPageByDate(LocalDateTime inputDateTime, String galleryId, boolean isMinorGallery);
+    void findPage(LocalDateTime inputDateTime, String galleryId, boolean isMinorGallery);
 }

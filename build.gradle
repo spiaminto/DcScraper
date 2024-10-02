@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.3'
+    id 'org.springframework.boot' version '3.3.3' apply false
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'maven-publish'
 }
 
 group = 'io.github.spiaminto'
@@ -17,6 +18,12 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -26,13 +33,52 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // selenium
-    implementation 'org.seleniumhq.selenium:selenium-java'
+    // playwright
+    implementation 'com.microsoft.playwright:playwright:1.47.0'
 
-    // Jsoup Html parser https://mvnrepository.com/artifact/org.jsoup/jsoup
+    // Jsoup
     implementation 'org.jsoup:jsoup:1.18.1'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// win32_x64 드라이버 제외한 모든 드라이버 제거 시작
+configurations {
+    runtimeClasspath {
+        canBeResolved = true
+    }
+}
+
+task bootJarWindowDriverOnly(type: Jar) {
+    archiveClassifier = 'win-driver-only'
+    from sourceSets.main.output
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude 'driver/linux/**'
+    exclude 'driver/linux-arm64/**'
+    exclude 'driver/mac/**'
+    exclude 'driver/mac-arm64/**'
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+artifacts {
+    archives bootJarWindowDriverOnly
+}
+// win32_x64 드라이버 제외한 모든 드라이버 제거 끝
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.spiaminto'
+            artifactId = 'dcscraper'
+            version = '0.0.1'
+            from components.java
+        }
+    }
 }

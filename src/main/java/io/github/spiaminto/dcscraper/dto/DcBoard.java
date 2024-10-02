@@ -1,10 +1,11 @@
 package io.github.spiaminto.dcscraper.dto;
 
+import io.github.spiaminto.dcscraper.util.ContentCleaner;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder @Getter
+@Builder @Getter @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class DcBoard {
@@ -19,14 +20,34 @@ public class DcBoard {
     private long commentCnt;
     private long recommendCnt;
     private boolean recommended;
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
     public void setContent(String content) {
         this.content = content;
     }
-    public void setRecommended(boolean recommended) { this.recommended = recommended; }
 
+    /**
+     * content 에서 html 태그와 불필요한 문자를 제거한 문자열을 반환합니다.
+     * @return 처리된 content
+     */
+    public String getCleanContent() {
+        return ContentCleaner.cleanContent(content);
+    }
+
+    /**
+     * content 에서 html 태그와 불필요한 문자를 제거한 cleanContent 로 toString 합니다.
+     * @return toString 결과
+     */
+    public String cleanedToString() {
+        return "DcBoard(" +
+                "dcNum=" + dcNum +
+                ", title=" + title +
+                ", cleanContent=" + getCleanContent() +
+                ", writer=" + writer +
+                ", regDate=" + regDate +
+                ", viewCnt=" + viewCnt +
+                ", commentCnt=" + commentCnt +
+                ", recommendCnt=" + recommendCnt +
+                ", recommended=" + recommended +
+                ')';
+    }
 }
 

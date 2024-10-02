@@ -20,12 +20,10 @@ public class DcBoardsAndComments {
 
     private List<DcBoard> boards;
     private List<DcComment> comments;
-//    private List<ScrapeFailure> failures;
 
     public DcBoardsAndComments(List<DcBoard> boards, List<DcComment> comments) {
         this.boards = boards;
         this.comments = comments;
-//        this.failures = failures;
     }
 
     /**
