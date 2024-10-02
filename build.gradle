@@ -38,6 +38,7 @@ dependencies {
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.18.1'
+
 }
 
 tasks.named('test') {
@@ -75,7 +76,7 @@ artifacts {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'io.github.spiaminto'
+            groupId = 'io.github.spiaminto.dcscraper'
             artifactId = 'dcscraper'
             version = '0.0.5'
             from components.java
