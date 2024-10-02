@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'io.github.spiaminto'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.5'
 
 java {
     toolchain {
@@ -77,7 +77,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'io.github.spiaminto'
             artifactId = 'dcscraper'
-            version = '0.0.1'
+            version = '0.0.5'
             from components.java
         }
     }
