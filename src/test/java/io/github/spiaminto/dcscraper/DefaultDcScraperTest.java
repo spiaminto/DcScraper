@@ -5,13 +5,11 @@ import io.github.spiaminto.dcscraper.dto.ScrapeRequest;
 import io.github.spiaminto.dcscraper.service.DcScraper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.logging.Logger;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 public class DefaultDcScraperTest {
     public static Logger log = Logger.getLogger(DefaultDcScraperTest.class.getName());
     @Autowired
