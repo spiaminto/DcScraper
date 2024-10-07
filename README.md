@@ -11,7 +11,7 @@ repositories {
 }
 dependencies {
     //...
-    implementation 'com.github.spiamint:DcScraper:1.0.5' 
+    implementation 'com.github.spiamint:DcScraper:1.0.6' 
 }
 ```
 ```maven
@@ -24,7 +24,7 @@ dependencies {
 <dependency>
     <groupId>com.github.spiamint</groupId>
     <artifactId>DcScraper</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
@@ -37,8 +37,12 @@ dependencies {
     public void startTest() {
         DcBoardsAndComments scraped = dcScraper.start(ScrapeRequest.of(
                 "github", true, 1, 1)); // 갤러리ID, 마이너 갤리러 여부, 시작페이지, 끝페이지
-        scraped.getBoards().forEach(dcBoard -> log.info(dcBoard.cleanedToString())); // 스크래핑 된 글
+
+        scraped.getBoards().forEach(dcBoard -> log.info(dcBoard.cleanedToString()));
+        // DcBoard(dcNum=71100, title=c언어 강의 추천하는거 있나요?, cleanContent=예시문제 같은것도 있었음 좋겠는데 추천좀 해주세요, writer=거북이이, regDate=2024-10-07T18:50:17, viewCnt=36, commentCnt=4, recommendCnt=0, recommended=false)
+        
         scraped.getComments().forEach(dcComment -> log.info(dcComment.cleanedToString())); // 스크래핑 된 댓글
+        // DcComment(commentNum=394827, boardNum=71100, writer=거북이이, cleanContent=오 좋아보이네요 ㄱㅅㄱㅅ, regDate=2024-10-07T19:11:22, reply=true, targetNum=394826)
     }
 ```
 기본적으로 시작 페이지 부터 끝 페이지 까지 글과 댓글 모두를 스크래핑 합니다. 페이지 당 글 갯수는 100개 입니다.
