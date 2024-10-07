@@ -271,6 +271,7 @@ public class DefaultDcScraper implements DcScraper {
                     if (scrapingOption != ScrapingOption.ALL) {
                         if (cutCounter > 0 && boardIndex >= cutCounter) { // 컷 카운터 적용
                             resultBoards = resultBoards.subList(0, (int) cutCounter);
+                            break;
                         }
                         continue;
                     }
@@ -318,7 +319,6 @@ public class DefaultDcScraper implements DcScraper {
                 addedBoardCommentCntTotal = 0;
                 resultDeletedCommentCount += addedDeletedCommentCount;
                 addedDeletedCommentCount = 0;
-                cutCounter = 1L;
 
             }// for pageNum
         } // try with resouce
