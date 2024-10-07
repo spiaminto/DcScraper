@@ -10,3 +10,7 @@ commit 2 (commit 1 로 커밋됨)
 commit 3
     프로퍼티 수정
     spring-configuration-metadata 작성
+
+commit 4
+    로그 레벨 조정
+    PageFinder 파라미터 수정, MaxRetryCount 수정

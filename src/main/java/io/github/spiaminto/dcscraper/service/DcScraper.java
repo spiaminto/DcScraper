@@ -39,7 +39,7 @@ public interface DcScraper {
     void startWithCallback(ScrapeRequest scrapeRequest, Consumer<DcBoardsAndComments> callback);
 
     /**
-     * 스크래핑 재시도 횟수를 설정합니다. 기본값 15
+     * 스크래핑 재시도 횟수를 설정합니다. 기본값 10
      * @param retryCount
      */
     void setMaxRetryCount(int retryCount);

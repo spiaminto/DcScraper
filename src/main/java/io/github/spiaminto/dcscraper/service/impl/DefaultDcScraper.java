@@ -52,7 +52,6 @@ public class DefaultDcScraper implements DcScraper {
 
         executor = ForkJoinPool.commonPool(); // default CompletableFuture executor
         scrapingOption = ScrapingOption.ALL;
-        maxRetryCount = 10;
         cutCounter = 0;
     }
 
@@ -138,7 +137,7 @@ public class DefaultDcScraper implements DcScraper {
                 failuresTotal.addAll(failures);
                 // 콜백 실행
                 if (interval > 0 && callback != null) {
-                    log.info("[START WITH CALLBACK] scraping executed callback, start = {}, end = {} interval = {}", intervalStartPage, intervalEndPage, interval);
+                    log.debug("[START WITH CALLBACK] scraping executed callback, start = {}, end = {} interval = {}", intervalStartPage, intervalEndPage, interval);
                     callbackFutures.add(CompletableFuture.runAsync(() -> callback.accept(scrapedContents), executor));
                 }
                 // 구간시작과 구간끝 증가
@@ -343,7 +342,7 @@ public class DefaultDcScraper implements DcScraper {
     protected Elements openListPageAndParse(String executeUrl) {
         Elements results = new Elements();
         try {
-            log.info("[DRIVER] opening listPage executeUrl = {}", executeUrl);
+            log.debug("[DRIVER] opening listPage executeUrl = {}", executeUrl);
             // 페이지 이동 및 요소탐색
             browserPage.navigate(executeUrl, new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT));
             ElementHandle gallList = browserPage.waitForSelector(boardListSelector);
@@ -367,7 +366,7 @@ public class DefaultDcScraper implements DcScraper {
         StopWatch stopwatch = new StopWatch(); // 개발용 스톱워치
         Element result; // 상세페이지의 main 요소 담길 변수
         try {
-            log.info("[DRIVER] opening viewPage executeUrl = {}", executeUrl);
+            log.debug("[DRIVER] opening viewPage executeUrl = {}", executeUrl);
             stopwatch.start();
             // 페이지 이동 및 요소탐색
             browserPage.navigate(executeUrl, new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT));
@@ -379,7 +378,7 @@ public class DefaultDcScraper implements DcScraper {
             result = result.select(boardViewContentSelector).isEmpty() ? null : result;
 
             stopwatch.stop();
-            log.info("[STOPWATCH] get mainElement from page : stopwatch.elapsed = {}", stopwatch.getTotalTimeSeconds());
+            log.debug("[STOPWATCH] get mainElement from page : stopwatch.elapsed = {}", stopwatch.getTotalTimeSeconds());
         } catch (Exception e) {
             log.error("[ERROR] webDriver.get(executeUrl);  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
             result = null;
@@ -486,6 +485,8 @@ public class DefaultDcScraper implements DcScraper {
 
         this.commentListSelector = props.getCommentListSelector();
         this.commentListItemSelector = props.getCommentListItemSelector();
+
+        this.maxRetryCount = props.getMaxRetryCount();
 
     }
 }

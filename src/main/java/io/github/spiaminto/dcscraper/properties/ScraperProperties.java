@@ -36,5 +36,5 @@ public class ScraperProperties {
     private String commentListSelector = ".cmt_list"; // 댓글 내용 로드 기다릴때 사용
     private String commentListItemSelector = ".cmt_list>li";
     
-    private int maxRetryCount = 15;
+    private int maxRetryCount = 10;
 }

@@ -412,7 +412,7 @@
       "name": "scraper.max-retry-count",
       "type": "java.lang.Integer",
       "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
-      "defaultValue": "15",
+      "defaultValue": "10",
       "description": "스크래핑 실패시 최대 재시도 횟수"
     }
   ],
