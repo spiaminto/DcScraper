@@ -30,6 +30,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
     private final String galleryNameParameterPrefix; // 반드시 첫번째로 사용하는 갤러리 이름 파라미터
     private final String pageParameter; // 페이징 파라미터
     private final String searchParameter; // 검색 파라미터(제목+내용)
+    private final String listNumParameter; // 리스트 갯수 파라미터
 
     private final long maxRetryCount;
 
@@ -43,6 +44,8 @@ public class DefaultDcPageFinder implements DcPageFinder {
         this.galleryNameParameterPrefix = pageFinderProperties.getGalleryNameParameterPrefix();
         this.pageParameter = pageFinderProperties.getPageParameter();
         this.searchParameter = pageFinderProperties.getSearchParameter();
+        this.listNumParameter = "&list_num=100";
+
     }
 
     public void findPage(LocalDate inputDate, String galleryId, boolean isMinorGallery) {
@@ -82,8 +85,9 @@ public class DefaultDcPageFinder implements DcPageFinder {
                 try {
 
                     // 검색 페이지 접속
-                    log.info("[DRIVER] findPage Initial executeUrl = {}", executeUrl);
+                    log.info("[PageFinder] findPage Initial executeUrl = {}", executeUrl);
                     browserPage.navigate(executeUrl);
+                    log.info("[PageFinder] moving to target time page");
 
                     // 빠른 이동 버튼 클릭
                     ElementHandle moveButton = browserPage.waitForSelector(".bottom_movebox>button");
@@ -139,13 +143,13 @@ public class DefaultDcPageFinder implements DcPageFinder {
                     // 디시 아이디의 차를 구하여 표시 글 갯수(50개) 로 나눔
                     // 이 lastPage 는 삭제된 글이 0 이라고 가정한 수치이므로 이로부터 삭제된 글을 감안하여 페이지를 당겨가며 확인
                     Long dcNumDiff = firstPageDcNum - targetDcNum;
-                    Long lastPage = dcNumDiff / 50;
+                    Long lastPage = dcNumDiff / 100;
 
                     // 1. 먼저 lastPage 부터 1000페이지씩 당겨 inputTime 보다 미래 글 이 포함된 페이지를 찾는다.
                     // 2. 해당 페이지를 searchStartPage 로 두고, 직적 페이지를 searchEndPage 로 둔다. 둘의 차는 1000페이지
                     // 3. inputTime 의 글은 두 페이지 사이에 있다.
 
-                    log.info("탐색을 위한 시작 페이지 찾기 시작");
+                    log.info("[PageFinder] finding exact Page");
                     LocalDateTime lastPageFirstDcBoardTime;
                     long searchEndPage = lastPage; // 밑에 탐색에서 끝페이지로 사용할 페이지. (가장 과거)
                     int lastPageWhileIndex = 0;
@@ -153,7 +157,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
                         searchEndPage = lastPage;
                         lastPage -= 1000;
                         // 끝페이지의 첫글을 찾아 작성일자 대조 후 targetTime 보다 과거글이면 1000페이지씩 당김
-                        executeUrl = urlPreFix + pageParameter + lastPage;
+                        executeUrl = urlPreFix + pageParameter + lastPage + listNumParameter;
                         browserPage.navigate(executeUrl);
                         ElementHandle lastPageGallList = browserPage.waitForSelector(".gall_list");
                         DcBoard lastPageFirstDcBoard = parseAndFindFirstDcBoard(lastPageGallList);
@@ -187,7 +191,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
                         }
 
                         // 중간 페이지 접속
-                        executeUrl = urlPreFix + pageParameter + middlePage;
+                        executeUrl = urlPreFix + pageParameter + middlePage + listNumParameter;
 //                    log.info("binarySearching else executeUrl = {}", executeUrl);
                         browserPage.navigate(executeUrl);
 
@@ -257,7 +261,6 @@ public class DefaultDcPageFinder implements DcPageFinder {
                 } finally {
                 }
             }
-            log.info("최종 종료;");
         }
     }
 

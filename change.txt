@@ -17,4 +17,8 @@ commit 4
 
 commit 5
     DcScraper cutCounter 동작 수정
-    리드미 작성중
+    리드미 작성
+
+commit 6
+    페이지 파인더 리스트 글갯수 100 개로 수정
+    리드미 작성
