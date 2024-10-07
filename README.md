@@ -4,7 +4,7 @@
 
 ## 1. 라이브러리 추가
 repositories와 dependencies에 아래 코드를 추가합니다.
-```build.gradle
+```gradle
 repositories {
     //...
     maven { url 'https://jitpack.io' } 
@@ -13,6 +13,19 @@ dependencies {
     //...
     implementation 'com.github.spiamint:DcScraper:0.0.13' 
 }
+```
+```maven
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+<dependency>
+    <groupId>com.github.spiamint</groupId>
+    <artifactId>DcScraper</artifactId>
+    <version>0.0.15</version>
+</dependency>
 ```
 
 ## 2. 스크래퍼 사용 예시
