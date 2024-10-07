@@ -45,8 +45,9 @@ public interface DcScraper {
     void setMaxRetryCount(int retryCount);
 
     /**
-     * 개발용 컷카운터 설정, ScrapingOption.ALL 일때만 작동.
-     * 기본값 0, 0보다 큰 값일 경우 컷 동작
+     * 리스트 페이지에서 스크래핑할 글 갯수를 설정합니다. 기본값 0 (무제한)
+     * 0보다 큰 값일 경우 해당 갯수만큼만 스크래핑합니다.
+     * ScrapingOption.VIEWPAGE, ScrapingOption.ALL 일 경우 만 작동합니다.
      * @param cutCounter
      */
     void setCutCounter(long cutCounter);

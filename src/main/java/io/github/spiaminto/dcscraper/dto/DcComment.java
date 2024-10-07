@@ -35,7 +35,7 @@ public class DcComment {
      */
     public String cleanedToString() {
         return "DcComment(" +
-                ", commentNum=" + commentNum +
+                "commentNum=" + commentNum +
                 ", boardNum=" + boardNum +
                 ", writer=" + writer +
                 ", cleanContent=" + getCleanContent() +

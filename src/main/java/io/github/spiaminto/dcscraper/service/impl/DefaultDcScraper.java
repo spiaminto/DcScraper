@@ -238,7 +238,7 @@ public class DefaultDcScraper implements DcScraper {
                 // 글 리스트에서 글 하나하나 순회시작
                 int boardIndex = 0; // 글 순회 인덱스.
                 while (boardIndex < extractedBoards.size()) {
-                    // ScrapingOption.VIEWPAGE 일 경우 중단
+                    // ScrapingOption.LISTPAGE 일 경우 중단
                     if (scrapingOption != ScrapingOption.ALL && scrapingOption != ScrapingOption.VIEWPAGE) break;
                     // 현재 글과 해당글의 href
                     DcBoard extractingBoard = extractedBoards.get(boardIndex);
@@ -268,7 +268,12 @@ public class DefaultDcScraper implements DcScraper {
                     boardIndex++;
 
                     // ScrapingOption.VIEWPAGE 종료지점 ============================================
-                    if (scrapingOption != ScrapingOption.ALL) break;
+                    if (scrapingOption != ScrapingOption.ALL) {
+                        if (cutCounter > 0 && boardIndex >= cutCounter) { // 컷 카운터 적용
+                            resultBoards = resultBoards.subList(0, (int) cutCounter);
+                        }
+                        continue;
+                    }
 
                     // 상세 페이지 댓글 추출 시작
                     List<DcComment> extractedComments = extractCommentsFromViewPage(extractingBoard.getDcNum(), mainElement);

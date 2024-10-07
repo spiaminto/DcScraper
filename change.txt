@@ -14,3 +14,7 @@ commit 3
 commit 4
     로그 레벨 조정
     PageFinder 파라미터 수정, MaxRetryCount 수정
+
+commit 5
+    DcScraper cutCounter 동작 수정
+    리드미 작성중
