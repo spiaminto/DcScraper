@@ -11,7 +11,7 @@ repositories {
 }
 dependencies {
     //...
-    implementation 'com.github.spiamint:DcScraper:0.0.13' 
+    implementation 'com.github.spiamint:DcScraper:1.0.5' 
 }
 ```
 ```maven
@@ -24,7 +24,7 @@ dependencies {
 <dependency>
     <groupId>com.github.spiamint</groupId>
     <artifactId>DcScraper</artifactId>
-    <version>0.0.15</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 

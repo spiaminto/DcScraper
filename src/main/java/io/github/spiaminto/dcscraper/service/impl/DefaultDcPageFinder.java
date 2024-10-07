@@ -252,7 +252,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
 //                        throw new RetryExceededException("retryCounter exceeded, stop scraping, retryCounter = {}" + retryCounter, e);
 //                    }
                 } catch (Exception e) {
-                    log.error("[ERROR] webDriver.get(executeUrl);  executeUrl = {} e.name = {}", executeUrl, e.getClass().getName());
+                    log.error("[ERROR] executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
                     retryCounter++;
                     // 재시도 횟수 초과 -> Exception 발생 및 스크래핑 종료
                     if (retryCounter > maxRetryCount) {
