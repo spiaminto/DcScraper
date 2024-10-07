@@ -91,7 +91,7 @@ public void findPageTest() {
         pageFinder.findPage(LocalDate.of(2024, 01, 01), "github", true); // 2024년 1월 1일의 github 마이너 갤러리 페이지를 찾음
     }
 ```
-특정 날짜를 기준으로 스크래핑 하고 싶을때, 해당 날짜의 글이 있는 페이지를 찾아주는 기능을 제공합니다.
+특정 날짜를 기준으로 스크래핑 하고 싶을때, 해당 날짜의 글이 있는 페이지를 찾아주는 기능을 제공합니다.  
 한 페이지 정도 오차가 있을 수 있기 때문에 로그를 확인하여 찾은 페이지가 맞는지 확인해야 합니다.
 
 ## 4. 프로퍼티 설정
@@ -108,7 +108,7 @@ scraper.list-num=50
     }
 ```
 요소를 찾을 선택자, 속성, 스크래핑 url 등을 설정할 수 있습니다.  
-각 프로퍼티의 접두어는 scraper, board-extractor, comment-extractor, page-finder 입니다.
+각 프로퍼티의 접두어는 scraper, board-extractor, comment-extractor, page-finder 입니다.  
 scraper.list-num 이외의 속성은 필요한 경우에만 사용하기를 권장합니다.
 
 ## 4. 사용 라이브러리
