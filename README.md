@@ -89,7 +89,7 @@ private DcPageFinder dcPageFinder;
 
 public void findPageTest() {
         pageFinder.findPage(LocalDate.of(2024, 01, 01), "github", true); // 2024년 1월 1일의 github 마이너 갤러리 페이지를 찾음
-        }
+    }
 ```
 특정 날짜를 기준으로 스크래핑 하고 싶을때, 해당 날짜의 글이 있는 페이지를 찾아주는 기능을 제공합니다.
 한 페이지 정도 오차가 있을 수 있기 때문에 로그를 확인하여 찾은 페이지가 맞는지 확인해야 합니다.
