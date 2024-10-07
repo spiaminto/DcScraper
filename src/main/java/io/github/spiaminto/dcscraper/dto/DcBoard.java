@@ -10,16 +10,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class DcBoard {
 
-    private Long dcNum;
-    private String title;
-    private String writer;
-    private String content;
-    private LocalDateTime regDate;
+    private Long dcNum; // 글 번호
+    private String title; // 제목
+    private String writer; // 작성자 닉네임
+    private String content; // 내용
+    private LocalDateTime regDate; // 작성일
 
-    private long viewCnt;
-    private long commentCnt;
-    private long recommendCnt;
-    private boolean recommended;
+    private long viewCnt; // 조회수
+    private long commentCnt; // 댓글수
+    private long recommendCnt; // 추천수
+    private boolean recommended; // 개념글 여부
     public void setContent(String content) {
         this.content = content;
     }
