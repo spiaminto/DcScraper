@@ -29,8 +29,7 @@ public class ScraperProperties {
     private String boardListItemSelector = "tbody tr";
 
     private String boardHrefSelector = ".gall_tit>a";
-    private String boardViewSelector = ".gallery_view";
-    private String boardViewSelectorAlter = "#container";
+    private String boardViewSelector = "#container";
 
     private String boardViewContentSelector = ".write_div"; // 글 내용 로드 기다릴때 사용
 

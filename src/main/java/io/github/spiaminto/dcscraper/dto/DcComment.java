@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class DcComment {
 
-    private Long id;
     private Long commentNum; // dc 댓글 번호
     private Long boardNum; // dc 게시글 번호
     private String writer;
@@ -36,7 +35,6 @@ public class DcComment {
      */
     public String cleanedToString() {
         return "DcComment(" +
-                "id=" + id +
                 ", commentNum=" + commentNum +
                 ", boardNum=" + boardNum +
                 ", writer=" + writer +

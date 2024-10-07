@@ -1,0 +1,420 @@
+{
+  "groups": [
+    {
+      "name": "board-extractor",
+      "type": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties"
+    },
+    {
+      "name": "comment-extractor",
+      "type": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties"
+    },
+    {
+      "name": "page-finder",
+      "type": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties"
+    },
+    {
+      "name": "scraper",
+      "type": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "board-extractor.gall-num-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_num",
+      "description": "dcNum 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.gall-num-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "text",
+      "description": "dcNum 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.title-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_tit>a",
+      "description": "title 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.title-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "text",
+      "description": "title 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.writer-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_writer>.nickname",
+      "description": "writer 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.writer-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "description": "writer 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.content-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".write_div",
+      "description": "content 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.content-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "innerHtml",
+      "description": "content 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.reg-date-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_date",
+      "description": "regDate 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.reg-date-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "title",
+      "description": "regDate 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.view-cnt-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_count",
+      "description": "viewCnt 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.view-cnt-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "text",
+      "description": "viewCnt 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.comment-cnt-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".reply_num",
+      "description": "commentCnt 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.recommend-cnt-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".gall_recommend",
+      "description": "recommendCnt 값을 가져올 selector"
+    },
+    {
+      "name": "board-extractor.recommend-cnt-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": "text",
+      "description": "recommendCnt 값을 가져올 attribute"
+    },
+    {
+      "name": "board-extractor.recommend-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
+      "defaultValue": ".icon_recomimg",
+      "description": "recommend 값을 가져올 selector"
+    },
+
+
+
+    {
+      "name": "comment-extractor.comment-num-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".cmt_info",
+      "description": "commentNum 값을 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.comment-num-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "data-no",
+      "description": "commentNum 값을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.reply-num-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".reply_info",
+      "description": "답글(대댓글)의 commentNum 값을 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.reply-num-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "data-no",
+      "description": "답글(대댓글)의 commentNum 값을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.comment-writer-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".cmt_nickbox .gall_writer",
+      "description": "writer 값을 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.comment-writer-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "data-nick",
+      "description": "writer 값을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.comment-content-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".cmt_txtbox",
+      "description": "content 값을 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.comment-content-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "innerHtml",
+      "description": "content 값을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.comment-reg-date-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".date_time",
+      "description": "regDate 값을 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.comment-reg-date-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "text",
+      "description": "regDate 값을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.is-dory-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".dory",
+      "description": "댓글돌이 요소를 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.is-reply-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".reply_list",
+      "description": "답글 리스트 요소를 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.is-deleted-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".del_reply",
+      "description": "삭제된 댓글 요소를 가져올 selector"
+    },
+    {
+      "name": "comment-extractor.is-deleted-attr",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": "text",
+      "description": "삭제된 댓글 내용을 가져올 attribute"
+    },
+    {
+      "name": "comment-extractor.reply-list-item-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.CommentExtractorProperties",
+      "defaultValue": ".reply_list>li",
+      "description": "답글 리스트 아이템을 가져올 selector"
+    },
+
+
+
+    {
+      "name": "page-finder.base-url",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "http://gall.dcinside.com",
+      "description": "기본 DC url"
+    },
+    {
+      "name": "page-finder.gallery-list-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "/board/lists/",
+      "description": "갤러리 리스트 uri"
+    },
+    {
+      "name": "page-finder.minor-gallery-list-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "/mgallery/board/lists/",
+      "description": "마이너 갤러리 리스트 uri"
+    },
+    {
+      "name": "page-finder.gallery-view-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "/board/view/",
+      "description": "갤러리 뷰 uri"
+    },
+    {
+      "name": "page-finder.gallery-name-parameter-prefix",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "?id=",
+      "description": "url 파라미터 갤러리 이름 접두어 ?id="
+    },
+    {
+      "name": "page-finder.page-parameter",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "&page=",
+      "description": "url 파라미터 페이지 번호 접두어 &page="
+    },
+    {
+      "name": "page-finder.search-parameter",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.PageFinderProperties",
+      "defaultValue": "&s_type=search_subject_memo&s_keyword=",
+      "description": "url 파라미터 검색어 접두어 &s_type=search_subject_memo&s_keyword="
+    },
+
+
+
+    {
+      "name": "scraper.base-url",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "http://gall.dcinside.com",
+      "description": "기본 DC url"
+    },
+    {
+      "name": "scraper.gallery-list-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "/board/lists/",
+      "description": "갤러리 리스트 uri"
+    },
+    {
+      "name": "scraper.minor-gallery-list-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "/mgallery/board/lists/",
+      "description": "마이너 갤러리 리스트 uri"
+    },
+    {
+      "name": "scraper.gallery-view-uri",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "/board/view/",
+      "description": "갤러리 뷰 uri"
+    },
+    {
+      "name": "scraper.gallery-id-parameter-prefix",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "?id=",
+      "description": "url 파라미터 갤러리 이름 접두어 ?id="
+    },
+    {
+      "name": "scraper.page-parameter-prefix",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "&page=",
+      "description": "url 파라미터 페이지 번호 접두어 &page="
+    },
+    {
+      "name": "scraper.list-num-parameter-prefix",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "&list_num=",
+      "description": "url 파라미터 리스트 개수 접두어 &list_num="
+    },
+    {
+      "name": "scraper.list-num",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "100",
+      "description": "표시 글 갯수 30, 50, 100(기본값)"
+    },
+    {
+      "name": "scraper.search-parameter-prefix",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "&s_type=search_subject_memo&s_keyword=",
+      "description": "url 파라미터 검색어 접두어 &s_type=search_subject_memo&s_keyword="
+    },
+    {
+      "name": "scraper.board-list-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": ".gall_list",
+      "description": "게시판 리스트를 가져올 selector"
+    },
+    {
+      "name": "scraper.board-list-item-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "tbody tr",
+      "description": "게시판 글 리스트 아이템을 가져올 selector"
+    },
+    {
+      "name": "scraper.board-href-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": ".gall_tit>a",
+      "descrption": "글 리스트 아이템의 링크(a) 를 가져올 selector"
+    },
+    {
+      "name": "scraper.board-view-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "#container",
+      "description": "글 상세 페이지의 글 내용 + 댓글 가져올 selector"
+    },
+    {
+      "name": "scraper.board-view-content-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": ".write_div",
+      "description": "글 상세 페이지의 글 내용을 가져올 selector"
+    },
+    {
+      "name": "scraper.comment-list-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": ".cmt_list",
+      "description": "글 상세 페이지의 댓글 리스트를 가져올 selector"
+    },
+    {
+      "name": "scraper.comment-list-item-selector",
+      "type": "java.lang.String",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": ".cmt_list>li",
+      "description": "글 상세 페이지의 댓글 리스트 아이템을 가져올 selector"
+    },
+    {
+      "name": "scraper.max-retry-count",
+      "type": "java.lang.Integer",
+      "sourceType": "io.github.spiaminto.dcscraper.properties.ScraperProperties",
+      "defaultValue": "15",
+      "description": "스크래핑 실패시 최대 재시도 횟수"
+    }
+  ],
+  "hints": []
+}

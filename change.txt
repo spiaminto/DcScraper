@@ -2,6 +2,11 @@
 commit 1
     첫 커밋
 
-commit 2
+commit 2 (commit 1 로 커밋됨)
     Selenium 에서 Playwright 로 변경
     기능 수정
+    jitpack.io 에 라이브러리 등록
+
+commit 3
+    프로퍼티 수정
+    spring-configuration-metadata 작성

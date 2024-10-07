@@ -371,7 +371,7 @@ public class DefaultDcScraper implements DcScraper {
             stopwatch.start();
             // 페이지 이동 및 요소탐색
             browserPage.navigate(executeUrl, new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT));
-            ElementHandle mainContainer = browserPage.waitForSelector(boardViewSelectorAlter, new Page.WaitForSelectorOptions().setState(WaitForSelectorState.ATTACHED));
+            ElementHandle mainContainer = browserPage.waitForSelector(boardViewSelector, new Page.WaitForSelectorOptions().setState(WaitForSelectorState.ATTACHED));
             // 파싱
             String mainContainerHtml = (String) mainContainer.evaluate("e => e.outerHTML");
             result = Jsoup.parse(mainContainerHtml);
@@ -457,7 +457,7 @@ public class DefaultDcScraper implements DcScraper {
     private String searchParameterPrefix;
     private String boardListSelector, boardListItemSelector;
     private String boardHrefSelector;
-    private String boardViewSelector, boardViewSelectorAlter;
+    private String boardViewSelector;
     private String boardViewContentSelector;
     private String commentListSelector, commentListItemSelector;
 
@@ -481,7 +481,6 @@ public class DefaultDcScraper implements DcScraper {
         this.boardHrefSelector = props.getBoardHrefSelector();
 
         this.boardViewSelector = props.getBoardViewSelector();
-        this.boardViewSelectorAlter = props.getBoardViewSelectorAlter();
 
         this.boardViewContentSelector = props.getBoardViewContentSelector();
 

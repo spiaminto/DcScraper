@@ -12,8 +12,8 @@ public class DcBoard {
 
     private Long dcNum;
     private String title;
-    private String content;
     private String writer;
+    private String content;
     private LocalDateTime regDate;
 
     private long viewCnt;
