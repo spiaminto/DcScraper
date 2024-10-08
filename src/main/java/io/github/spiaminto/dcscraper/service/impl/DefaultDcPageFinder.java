@@ -3,6 +3,7 @@ package io.github.spiaminto.dcscraper.service.impl;
 
 import com.microsoft.playwright.*;
 import io.github.spiaminto.dcscraper.dto.DcBoard;
+import io.github.spiaminto.dcscraper.enums.GalleryType;
 import io.github.spiaminto.dcscraper.exception.RetryExceededException;
 import io.github.spiaminto.dcscraper.extractor.BoardExtractor;
 import io.github.spiaminto.dcscraper.properties.PageFinderProperties;
@@ -48,7 +49,8 @@ public class DefaultDcPageFinder implements DcPageFinder {
 
     }
 
-    public void findPage(LocalDate inputDate, String galleryId, boolean isMinorGallery) {
+    public void findPage(LocalDate inputDate, String galleryId, GalleryType galleryType) {
+        boolean isMinorGallery = galleryType==GalleryType.MINOR;
         // 드라이버 켜기
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(

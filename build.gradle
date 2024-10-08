@@ -34,6 +34,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
     // playwright
     implementation 'com.microsoft.playwright:playwright:1.47.0'
 
@@ -83,3 +86,6 @@ publishing {
         }
     }
 }
+
+compileJava.options.encoding = 'UTF-8'
+

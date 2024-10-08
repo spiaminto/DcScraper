@@ -5,6 +5,7 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.options.WaitUntilState;
 import io.github.spiaminto.dcscraper.dto.*;
+import io.github.spiaminto.dcscraper.enums.GalleryType;
 import io.github.spiaminto.dcscraper.enums.ScrapingOption;
 import io.github.spiaminto.dcscraper.exception.RetryExceededException;
 import io.github.spiaminto.dcscraper.extractor.BoardExtractor;
@@ -78,7 +79,7 @@ public class DefaultDcScraper implements DcScraper {
 
     public DcBoardsAndComments start(ScrapeRequest scrapeRequest) {
         galleryId = scrapeRequest.getGalleryId();
-        isMinorGallery = scrapeRequest.isMinorGallery();
+        isMinorGallery = scrapeRequest.getGalleryType() == GalleryType.MINOR;
         long startPage = scrapeRequest.getStartPage();
         long endPage = scrapeRequest.getEndPage();
 
@@ -107,7 +108,7 @@ public class DefaultDcScraper implements DcScraper {
 
     public void startWithCallback(ScrapeRequest scrapeRequest, Consumer<DcBoardsAndComments> callback) {
         galleryId = scrapeRequest.getGalleryId();
-        isMinorGallery = scrapeRequest.isMinorGallery();
+        isMinorGallery = scrapeRequest.getGalleryType() == GalleryType.MINOR;
         long startPage = scrapeRequest.getStartPage();
         long endPage = scrapeRequest.getEndPage();
         long interval = scrapeRequest.getInterval();
@@ -305,8 +306,8 @@ public class DefaultDcScraper implements DcScraper {
 
                 } // for trElements
 
-                log.info("[PAGE END] pageNum = {}/{} addedBoardCount = {}",
-                        pageNum, maxPageNum, addedBoardCount);
+                log.info("[PAGE END] pageNum = {}/{} resultBoards.size = {}",
+                        pageNum, maxPageNum, resultBoards.size());
                 log.info("addCommentCount = {}, addedBoardCommentCntTotal = {}, calculated expected = {}",
                         addedCommentCount, addedBoardCommentCntTotal, addedCommentCount - addedDeletedCommentCount);
                 // 다음 페이지로
@@ -347,7 +348,7 @@ public class DefaultDcScraper implements DcScraper {
     protected Elements openListPageAndParse(String executeUrl) {
         Elements results = new Elements();
         try {
-            log.debug("[DRIVER] opening listPage executeUrl = {}", executeUrl);
+            log.debug("[Playwright] opening listPage executeUrl = {}", executeUrl);
             // 페이지 이동 및 요소탐색
             browserPage.navigate(executeUrl, new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT));
             ElementHandle gallList = browserPage.waitForSelector(boardListSelector);
@@ -371,7 +372,7 @@ public class DefaultDcScraper implements DcScraper {
         StopWatch stopwatch = new StopWatch(); // 개발용 스톱워치
         Element result; // 상세페이지의 main 요소 담길 변수
         try {
-            log.debug("[DRIVER] opening viewPage executeUrl = {}", executeUrl);
+            log.debug("[Playwright] opening viewPage executeUrl = {}", executeUrl);
             stopwatch.start();
             // 페이지 이동 및 요소탐색
             browserPage.navigate(executeUrl, new Page.NavigateOptions().setWaitUntil(WaitUntilState.COMMIT));
@@ -427,6 +428,7 @@ public class DefaultDcScraper implements DcScraper {
         long boardPerSecond = scrapeStatus.getTotalBoardCnt() == 0 ? 0 : duration.getSeconds() / scrapeStatus.getTotalBoardCnt();
         long executePageCount = scrapeStatus.getExecutedPageCount();
         long secondsPerPage = executePageCount == 0 ? 0 : duration.getSeconds() / (executePageCount);
+        long boardPerPage = cutCounter == 0 ? Long.parseLong(listNum) : cutCounter;
 
         log.info("\n [SCRAPE COMPLETE] ==================================================\n" +
                         "  elaspedTime = {}h : {}m : {}s : {}millis, \n" +
@@ -440,8 +442,7 @@ public class DefaultDcScraper implements DcScraper {
                 boardPerSecond, secondsPerPage,
                 startTime, endTime,
                 startPage, endPage, executePageCount,
-                (executePageCount) * 100,
-                scrapeStatus.getTotalDeletedCommentCnt() + scrapeStatus.getTotalCommentCntFromBoard(),
+                (executePageCount) * boardPerPage, scrapeStatus.getTotalDeletedCommentCnt() + scrapeStatus.getTotalCommentCntFromBoard(),
                 scrapeStatus.getTotalBoardCnt(), scrapeStatus.getTotalCommentCnt());
 
         if (!failures.isEmpty()) {

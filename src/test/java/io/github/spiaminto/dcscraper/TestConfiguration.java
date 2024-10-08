@@ -11,7 +11,6 @@ import io.github.spiaminto.dcscraper.service.DcScraper;
 import io.github.spiaminto.dcscraper.service.impl.DefaultDcPageFinder;
 import io.github.spiaminto.dcscraper.service.impl.DefaultDcScraper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties({BoardExtractorProperties.class, CommentExtractorProperties.class, ScraperProperties.class, PageFinderProperties.class})
-public class DcScraperAutoConfig {
+public class TestConfiguration {
 
     private final BoardExtractorProperties boardExtractorProperties;
     private final CommentExtractorProperties commentExtractorProperties;

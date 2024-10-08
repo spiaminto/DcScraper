@@ -1,7 +1,9 @@
-package io.github.spiaminto.dcscraper;
+package io.github.spiaminto.dcscraper.service.impl;
 
+import io.github.spiaminto.dcscraper.TestConfiguration;
 import io.github.spiaminto.dcscraper.dto.DcBoardsAndComments;
 import io.github.spiaminto.dcscraper.dto.ScrapeRequest;
+import io.github.spiaminto.dcscraper.enums.GalleryType;
 import io.github.spiaminto.dcscraper.service.DcScraper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.logging.Logger;
 
-@SpringBootTest
+@SpringBootTest(classes = TestConfiguration.class)
 public class DefaultDcScraperTest {
     public static Logger log = Logger.getLogger(DefaultDcScraperTest.class.getName());
-    @Autowired
-    DcScraper dcScraper;
+    @Autowired DcScraper dcScraper;
 
     @Test
     public void scrapeTest() {
         dcScraper.setCutCounter(3);
-        DcBoardsAndComments extracted = dcScraper.start(ScrapeRequest.of("github", true, 1, 1, 1));
+        DcBoardsAndComments extracted = dcScraper.start(ScrapeRequest.of("github", GalleryType.MINOR, 1, 3));
         extracted.getBoards().forEach(dcBoard -> {
             log.info(dcBoard.cleanedToString());
         });
@@ -26,7 +27,7 @@ public class DefaultDcScraperTest {
             log.info(dcComment.cleanedToString());
         });
         dcScraper.startWithCallback(ScrapeRequest
-                .of("github", true, 1, 1, 1), this::showResult);
+                .of("granblue", GalleryType.MAJOR, 1, 2, 1), this::showResult);
 
     }
 

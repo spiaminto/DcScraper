@@ -39,7 +39,7 @@ pom.xml
 
     public void startTest() {
         DcBoardsAndComments scraped = dcScraper.start(
-                ScrapeRequest.of("github", true, 1, 1)); // 갤러리ID, 마이너 갤리러 여부, 시작페이지, 끝페이지
+                ScrapeRequest.of("github", GalleryType.MINOR, 1, 1)); // 갤러리ID, 갤러리 타입, 시작페이지, 끝페이지
         scraped.getBoards().forEach(dcBoard -> log.info(dcBoard.cleanedToString())); // 스크래핑 된 글
         // DcBoard(boardNum=71100, title=c언어 강의 추천하는거 있나요?, cleanContent=예시문제 같은것도 있었음 좋겠는데 추천좀 해주세요, writer=거북이이, regDate=2024-10-07T18:50:17, viewCnt=36, commentCnt=4, recommendCnt=0, recommended=false)
         
@@ -49,7 +49,8 @@ pom.xml
 ```
 DcScraper 객체를 주입받아 시작 페이지 부터 끝 페이지 까지 글과 댓글 모두를 스크래핑 합니다.  
 한 페이지당 글 갯수의 기본값은 100개 이며 설문, 공지 글은 스크래핑 되지 않습니다.  
-갤러리ID 는 디시인사이드 url의 id 파라미터(?id=github) 값입니다.  
+갤러리ID 는 디시인사이드 url의 id 파라미터(?id=github) 값입니다.    
+갤러리 타입은 MAJOR(정규 갤러리), MINOR(마이너 갤러리) 두가지가 있습니다.
 
 #### 1.2 콜백을 실행하는 스크래핑
 ```java
@@ -58,7 +59,7 @@ DcScraper 객체를 주입받아 시작 페이지 부터 끝 페이지 까지 �
 
     public void callbackTest() {
         dcScraper.startWithCallback(
-                ScrapeRequest.of("github", true, 1, 3, 2), // 갤러리ID, 마이너 갤리러 여부, 시작페이지, 끝페이지, 콜백 인터벌
+                ScrapeRequest.of("github", GalleryType.MINOR, 1, 3, 2), // 갤러리ID, 갤러리 타입, 시작페이지, 끝페이지, 콜백 인터벌
                 this::callBack);  // 실행 할 콜백
     }
     public void callBack(DcBoardsAndComments scraped) {
@@ -78,7 +79,7 @@ DcScraper 객체를 주입받아 시작 페이지 부터 끝 페이지 까지 �
         dcScraper.setCutCounter(5); // 한 리스트 페이지에서 스크래핑할 글 갯수 제한
         dcScraper.setScrapingOption(ScrapingOption.VIEWPAGE); // 스크래핑 옵션(범위) 설정
         dcScraper.setMaxRetryCount(5); // 최대 재시도 횟수 설정
-        DcBoardsAndComments scraped = dcScraper.start(ScrapeRequest.of("github", true, 1, 1));
+        DcBoardsAndComments scraped = dcScraper.start(ScrapeRequest.of("github", GalleryType.MINOR, 1, 1));
         log.info("boards size: " + scraped.getBoards().size()); // boards size: 5
         log.info("comments size: " + scraped.getComments().size()); // comments size: 0
     }
@@ -94,7 +95,7 @@ DcScraper 객체를 주입받아 시작 페이지 부터 끝 페이지 까지 �
 private DcPageFinder pageFinder;
 
 public void findPageTest() {
-        pageFinder.findPage(LocalDate.of(2024, 01, 01), "github", true); // 2024년 1월 1일의 github 마이너 갤러리 페이지를 찾음
+        pageFinder.findPage(LocalDate.of(2024, 01, 01), "github", GalleryType.MINOR); // 2024년 1월 1일의 github 마이너 갤러리 페이지를 찾음
         // [SEARCH] End ==============================================
         // find page number = 113
         // -> check URL = http://gall.dcinside.com/mgallery/board/lists/?id=github&page=113&list_num=100
@@ -117,7 +118,7 @@ board-extractor.board-num-attr=text
     private DcScraper scraper;
 
     public void propertyTest(){
-        scraper.start(ScrapeRequest.of("github",true,1,1)); // 접속 url = http://gall.dcinside.com/mgallery/board/lists/?id=github&page=1&list_num=50
+        scraper.start(ScrapeRequest.of("github",GalleryType.MINOR,1,1)); // 접속 url = http://gall.dcinside.com/mgallery/board/lists/?id=github&page=1&list_num=50
     }
 ```
 요소를 찾을 선택자, 속성, 스크래핑 url 등을 설정할 수 있습니다.  
