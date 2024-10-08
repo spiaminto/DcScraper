@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component @ConfigurationProperties(prefix = "board-extractor")
 @Getter @Setter
 public class BoardExtractorProperties {
-    private final String gallNumSelector = ".gall_num";
-    private final String gallNumAttr = "text";
+    private final String boardNumSelector = ".gall_num";
+    private final String boardNumAttr = "text";
 
     private final String titleSelector = ".gall_tit>a";
     private final String titleAttr = "text";

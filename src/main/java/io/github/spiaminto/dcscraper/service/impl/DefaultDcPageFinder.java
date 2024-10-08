@@ -129,7 +129,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
                     ElementHandle targetPageGallList = browserPage.waitForSelector(".gall_list");
                     // 타겟 날짜의 페이지에서 리스트중 첫번째 글 파싱 및 dcNum 추출
                     DcBoard targetDcBoard = parseAndFindFirstDcBoard(targetPageGallList);
-                    Long targetDcNum = targetDcBoard.getDcNum();
+                    Long targetDcNum = targetDcBoard.getBoardNum();
                     log.debug("해당 일에 작성된 마지막 글 추출");
 
                     // 갤러리 첫 페이지로 이동 및 첫 표시 글 dcNum 파싱 및 추출
@@ -137,7 +137,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
                     browserPage.navigate(executeUrl);
                     ElementHandle firstPageGallList = browserPage.waitForSelector(".gall_list");
                     DcBoard firstDcBoard = parseAndFindFirstDcBoard(firstPageGallList);
-                    Long firstPageDcNum = firstDcBoard.getDcNum();
+                    Long firstPageDcNum = firstDcBoard.getBoardNum();
                     log.debug("갤러리 맨 첫페이지로 이동 및 최신 글 추출");
 
                     // 디시 아이디의 차를 구하여 표시 글 갯수(50개) 로 나눔
@@ -270,7 +270,7 @@ public class DefaultDcPageFinder implements DcPageFinder {
         DcBoard result = null;
         for (Element trElement : trElements) {
             DcBoard extractedBoard = boardExtractor.extractFromListPage(trElement);
-            if (extractedBoard.getDcNum() != -1) {
+            if (extractedBoard.getBoardNum() != -1) {
                 result = extractedBoard;
                 break;
 

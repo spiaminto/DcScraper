@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'io.github.spiaminto'
-version = '0.0.8'
+version = '1.0.7'
 
 java {
     toolchain {
@@ -39,7 +39,6 @@ dependencies {
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.18.1'
-
 }
 
 tasks.named('test') {
@@ -79,7 +78,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = 'io.github.spiaminto.dcscraper'
             artifactId = 'dcscraper'
-            version = '0.0.8'
+            version = '1.0.7'
             from components.java
         }
     }

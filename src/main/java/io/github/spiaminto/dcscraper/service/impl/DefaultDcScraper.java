@@ -217,7 +217,7 @@ public class DefaultDcScraper implements DcScraper {
                 List<DcBoard> extractedBoards = new ArrayList<>(); // 글 리스트에서 추출한 DcBoard 리스트
                 for (Element trElement : trElements) {
                     DcBoard extractingBoard = boardExtractor.extractFromListPage(trElement);
-                    if (extractingBoard.getDcNum() == -1) {
+                    if (extractingBoard.getBoardNum() == -1) {
                         continue; // 공지, AD, 제휴글 등의 이유로 건너뛰어짐
                     } else {
                         // a 태그에서 글 href 추출 (/board/view/?id=granblue&no=4803525&page=1)
@@ -277,7 +277,7 @@ public class DefaultDcScraper implements DcScraper {
                     }
 
                     // 상세 페이지 댓글 추출 시작
-                    List<DcComment> extractedComments = extractCommentsFromViewPage(extractingBoard.getDcNum(), mainElement);
+                    List<DcComment> extractedComments = extractCommentsFromViewPage(extractingBoard.getBoardNum(), mainElement);
                     // 완성된 List<DcComment> 객체 저장
                     resultComments.addAll(extractedComments);
 
@@ -395,10 +395,10 @@ public class DefaultDcScraper implements DcScraper {
      * 본문내용 + 댓글 요소를 포함하는 mainElement 로부터 댓글 리스트를 추출하여 반환
      *
      * @param mainElement
-     * @param dcNum
+     * @param boardNum
      * @return
      */
-    public List<DcComment> extractCommentsFromViewPage(long dcNum, Element mainElement) {
+    public List<DcComment> extractCommentsFromViewPage(long boardNum, Element mainElement) {
         List<DcComment> results = new ArrayList<>();
 
         // 댓글 리스트 ul 요소 추출
@@ -409,7 +409,7 @@ public class DefaultDcScraper implements DcScraper {
             Elements liElementsComment = ulElementComment.select(commentListItemSelector);
             Element liElementPrev = null; // 답글의 target 설정을 위한 직전 반복 댓글
             for (Element liElement : liElementsComment) {
-                List<DcComment> extractedComments = commentExtractor.extractCommentAndReply(dcNum, liElement, liElementPrev);
+                List<DcComment> extractedComments = commentExtractor.extractCommentAndReply(boardNum, liElement, liElementPrev);
                 results.addAll(extractedComments);
                 liElementPrev = liElement;
             }

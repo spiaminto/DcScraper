@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class DcBoard {
 
-    private Long dcNum; // 글 번호
+    private Long boardNum; // 글 번호
     private String title; // 제목
     private String writer; // 작성자 닉네임
     private String content; // 내용
@@ -38,7 +38,7 @@ public class DcBoard {
      */
     public String cleanedToString() {
         return "DcBoard(" +
-                "dcNum=" + dcNum +
+                "boardNum=" + boardNum +
                 ", title=" + title +
                 ", cleanContent=" + getCleanContent() +
                 ", writer=" + writer +

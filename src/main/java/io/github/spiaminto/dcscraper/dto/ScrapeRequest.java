@@ -12,7 +12,7 @@ public class ScrapeRequest {
     private final boolean isMinorGallery;
 
     /**
-     * 스크래핑 요청 생성
+     * 정규 갤러리 스크래핑 요청 생성. isMinorGallery = false
      * @param galleryId : 갤러리 id (주소창의 lists/?id= 뒤에 있는 값)
      * @param startPage : 시작 페이지
      * @param endPage : 끝 페이지
@@ -35,7 +35,7 @@ public class ScrapeRequest {
     }
 
     /**
-     * 스크래핑 요청 생성
+     * 정규 갤러리 콜백 스크래핑 요청 생성. isMinorGallery = false
      * @param galleryId : 갤러리 id (주소창의 lists/?id= 뒤에 있는 값)
      * @param startPage : 시작 페이지
      * @param endPage : 끝 페이지
@@ -47,7 +47,7 @@ public class ScrapeRequest {
     }
 
     /**
-     * 스크래핑 요청 생성
+     * 콜백 스크래핑 요청 생성
      * @param galleryId : 갤러리 id (주소창의 lists/?id= 뒤에 있는 값)
      * @param isMinorGallery : 마이너 갤러리 여부
      * @param startPage : 시작 페이지

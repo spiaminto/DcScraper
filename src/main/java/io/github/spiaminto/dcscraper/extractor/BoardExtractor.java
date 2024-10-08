@@ -2,7 +2,6 @@ package io.github.spiaminto.dcscraper.extractor;
 
 import io.github.spiaminto.dcscraper.dto.DcBoard;
 import io.github.spiaminto.dcscraper.properties.BoardExtractorProperties;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
@@ -40,14 +39,14 @@ public class BoardExtractor {
      * 디시 글 리스트(테이블) 의 tr 요소를 받아 필요 내용을 추출
      *
      * @param trElement
-     * @return content, recommend 가 set 되지 않은 DcBoard 객체. 공지나 AD 등 추출 실패시 dcNum = -1 인 DcBoard 객체 반환
+     * @return content, recommend 가 set 되지 않은 DcBoard 객체. 공지나 AD 등 추출 실패시 boardNum = -1 인 DcBoard 객체 반환
      */
     public DcBoard extractFromListPage(Element trElement) {
-        String gallNumString = selectBy(trElement, props.getGallNumSelector(), props.getGallNumAttr());
-        if (!extractableMinorGallery(trElement)) return DcBoard.builder().dcNum(-1L).build();
+        String gallNumString = selectBy(trElement, props.getBoardNumSelector(), props.getBoardNumAttr());
+        if (!extractableMinorGallery(trElement)) return DcBoard.builder().boardNum(-1L).build();
         long gallNum = parseGallNum(gallNumString);
         if (gallNum == -1) {
-            return DcBoard.builder().dcNum(-1L).build();
+            return DcBoard.builder().boardNum(-1L).build();
         }
 
         // 내용 추출
@@ -66,7 +65,7 @@ public class BoardExtractor {
 
         // 글 저장용 객체 생성(내용제외)
         return DcBoard.builder()
-                .dcNum(gallNum)
+                .boardNum(gallNum)
                 .title(title)
                 .writer(writer)
                 .regDate(convertedRegDate)

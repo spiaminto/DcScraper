@@ -23,11 +23,11 @@ public class CommentExtractor {
     /**
      * 댓글 li 요소 리스트 (.cmt_list>li) 에서 댓글 또는 답글을 추출
      *
-     * @param dcBoardNum 게시글 번호
+     * @param boardNum 게시글 번호
      * @param liElement  댓글 li 요소 (댓글 1 개 or 답글리스트)
      * @return 댓글과 답글 리스트 (댓글일 경우 size = 1, 답글리스트 일경우 size = 답글갯수, 댓글돌이 등 추출불가 size = 0)
      */
-    public List<DcComment> extractCommentAndReply(long dcBoardNum, Element liElement, Element liElementPrev) {
+    public List<DcComment> extractCommentAndReply(long boardNum, Element liElement, Element liElementPrev) {
         List<DcComment> results = new ArrayList<>(); // 결과
 
         if (isDory(liElement)) {
@@ -38,10 +38,10 @@ public class CommentExtractor {
             // 댓글
             if (isDeleted(liElement)) { // 삭제여부 확인
                 // 삭제된 댓글
-                results.add(extractDeletedComment(dcBoardNum, liElement));
+                results.add(extractDeletedComment(boardNum, liElement));
             } else {
                 // 일반 댓글
-                results.add(extractComment(dcBoardNum, liElement));
+                results.add(extractComment(boardNum, liElement));
             }
         } else {
             // 답글 리스트
@@ -50,7 +50,7 @@ public class CommentExtractor {
             for (Element liElementReply : liElementsReply) {
                 if (isDeleted(liElementReply)) { // 삭제여부 확인
                     // 삭제된 답글
-                    results.add(extractDeletedReply(dcBoardNum, liElementReply));
+                    results.add(extractDeletedReply(boardNum, liElementReply));
                 } else {
                     // 답글
                     long targetId;
@@ -60,7 +60,7 @@ public class CommentExtractor {
                     } else {
                         targetId = Long.parseLong(selectBy(liElementPrev, props.getCommentNumSelector(), props.getCommentNumAttr()));
                     }
-                    results.add(extractReply(dcBoardNum, liElementReply, targetId));
+                    results.add(extractReply(boardNum, liElementReply, targetId));
                 }
 
             }
@@ -81,7 +81,7 @@ public class CommentExtractor {
         return presenceSelectBy(liElement, props.getIsDorySelector());
     }
 
-    protected DcComment extractComment(long dcBoardNum, Element listItem) {
+    protected DcComment extractComment(long boardNum, Element listItem) {
         String commentNum = selectBy(listItem, props.getCommentNumSelector(), props.getCommentNumAttr());
         String writer = selectBy(listItem, props.getCommentWriterSelector(), props.getCommentWriterAttr());
         String content = selectBy(listItem, props.getCommentContentSelector(), props.getCommentContentAttr());
@@ -90,7 +90,7 @@ public class CommentExtractor {
         LocalDateTime parsedTime = parseTime(regDate);
 
         return DcComment.builder()
-                .boardNum(dcBoardNum)
+                .boardNum(boardNum)
                 .commentNum(Long.parseLong(commentNum))
                 .writer(writer)
                 .content(content)
@@ -99,7 +99,7 @@ public class CommentExtractor {
                 .build();
     }
 
-    public DcComment extractReply(long dcBoardNum, Element listItem, long targetNum) {
+    public DcComment extractReply(long boardNum, Element listItem, long targetNum) {
         String replyNum = selectBy(listItem, props.getReplyNumSelector(), props.getReplyNumAttr());
         String writer = selectBy(listItem, props.getCommentWriterSelector(), props.getCommentWriterAttr());
         String content = selectBy(listItem, props.getCommentContentSelector(), props.getCommentContentAttr());
@@ -107,7 +107,7 @@ public class CommentExtractor {
         LocalDateTime parsedTime = parseTime(regDate);
 
         return DcComment.builder()
-                .boardNum(dcBoardNum)
+                .boardNum(boardNum)
                 .commentNum(Long.parseLong(replyNum))
                 .writer(writer)
                 .content(content)
@@ -117,24 +117,24 @@ public class CommentExtractor {
                 .build();
     }
 
-    public DcComment extractDeletedComment(long dcBoardNum, Element liElement) {
+    public DcComment extractDeletedComment(long boardNum, Element liElement) {
         String commentNum = selectBy(liElement, props.getCommentNumSelector(), props.getCommentNumAttr());
         String content = selectBy(liElement, props.getIsDeletedSelector(), props.getIsDeletedAttr());
 
         return DcComment.builder()
-                .boardNum(dcBoardNum)
+                .boardNum(boardNum)
                 .commentNum(Long.parseLong(commentNum))
                 .content(content)
                 .reply(false)
                 .build();
     }
 
-    public DcComment extractDeletedReply(long dcBoardNum, Element liElement) {
+    public DcComment extractDeletedReply(long boardNum, Element liElement) {
         String commentNum = selectBy(liElement, props.getReplyNumSelector(), props.getReplyNumAttr());
         String content = selectBy(liElement, props.getIsDeletedSelector(), props.getIsDeletedAttr());
 
         return DcComment.builder()
-                .boardNum(dcBoardNum)
+                .boardNum(boardNum)
                 .commentNum(Long.parseLong(commentNum))
                 .content(content)
                 .reply(false)

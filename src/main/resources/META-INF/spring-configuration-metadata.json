@@ -23,18 +23,18 @@
   ],
   "properties": [
     {
-      "name": "board-extractor.gall-num-selector",
+      "name": "board-extractor.board-num-selector",
       "type": "java.lang.String",
       "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
       "defaultValue": ".gall_num",
-      "description": "dcNum 값을 가져올 selector"
+      "description": "boardNum 값을 가져올 selector"
     },
     {
-      "name": "board-extractor.gall-num-attr",
+      "name": "board-extractor.board-num-attr",
       "type": "java.lang.String",
       "sourceType": "io.github.spiaminto.dcscraper.properties.BoardExtractorProperties",
       "defaultValue": "text",
-      "description": "dcNum 값을 가져올 attribute"
+      "description": "boardNum 값을 가져올 attribute"
     },
     {
       "name": "board-extractor.title-selector",

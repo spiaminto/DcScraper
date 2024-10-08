@@ -2,6 +2,9 @@ package io.github.spiaminto.dcscraper.dto;
 
 import lombok.Data;
 
+/**
+ * 글 리스트 페이지에서 예상 갯수보다 적게 로딩되거나 추출되었을때의 정보를 저장하는 클래스
+ */
 @Data
 public class ScrapeFailure {
 
