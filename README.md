@@ -104,6 +104,11 @@ DcBoard 의 content 필드는 html 태그가 포함된 문자열입니다. getCl
   + VIEWPAGE: 리스트페이지와 상세페이지 모두 접속하여 글 만 스크래핑
   + LISTPAGE: 리스트페이지만 접속하여 글(내용없음) 만 스크래핑 
 
+#### 1.4 스크래핑 예제
+다음은 글 3개를 스
+<img src="https://github.com/user-attachments/assets/b5417ead-5af3-41c5-92b1-d37dc456dd28">
+<img src="https://github.com/user-attachments/assets/9f98c680-0ada-44d0-a7a7-43f5e468a46c">
+
 ## 3. 페이지 파인더 
 ```java
     @Autowired

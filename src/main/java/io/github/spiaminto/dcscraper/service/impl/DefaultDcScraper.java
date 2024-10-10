@@ -226,6 +226,10 @@ public class DefaultDcScraper implements DcScraper {
                         extractedBoards.add(extractingBoard);
                     }
                 }
+                // 컷 카운터로 자르기
+                if (cutCounter > 0) {
+                    extractedBoards = extractedBoards.subList(0, (int) cutCounter);
+                }
                 resultBoards.addAll(extractedBoards);
                 addedBoardCount += extractedBoards.size();
 
@@ -269,13 +273,7 @@ public class DefaultDcScraper implements DcScraper {
                     boardIndex++;
 
                     // ScrapingOption.VIEWPAGE 종료지점 ============================================
-                    if (scrapingOption != ScrapingOption.ALL) {
-                        if (cutCounter > 0 && boardIndex >= cutCounter) { // 컷 카운터 적용
-                            resultBoards = resultBoards.subList(0, (int) cutCounter);
-                            break;
-                        }
-                        continue;
-                    }
+                    if (scrapingOption != ScrapingOption.ALL) { break; }
 
                     // 상세 페이지 댓글 추출 시작
                     List<DcComment> extractedComments = extractCommentsFromViewPage(extractingBoard.getBoardNum(), mainElement);
@@ -297,12 +295,6 @@ public class DefaultDcScraper implements DcScraper {
 
                     // 글 하나만 하고 끝내기
 //                break;
-
-                    // 컷 카운터 설정시 컷, 결과 글 리스트는 자름.
-                    if (cutCounter > 0 && boardIndex >= cutCounter) {
-                        resultBoards = resultBoards.subList(0, (int) cutCounter);
-                        break;
-                    }
 
                 } // for trElements
 

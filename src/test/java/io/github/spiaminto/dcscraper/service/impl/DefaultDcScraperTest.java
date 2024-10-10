@@ -43,7 +43,7 @@ public class DefaultDcScraperTest {
     public void callbackTest() {
         dcScraper.setCutCounter(3);
         dcScraper.startWithCallback(
-                ScrapeRequest.of("granblue", GalleryType.MAJOR, 1, 2, 1),
+                ScrapeRequest.of("granblue", GalleryType.MAJOR, 1, 10, 5),
                 this::writeToFile);
 
     }
