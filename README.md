@@ -129,8 +129,8 @@ ScrapingOption 스크래핑 옵션
         
         // 파일에 글, 댓글 작성
         try(FileWriter boardWriter = new FileWriter(boardTxt); FileWriter commentWriter = new FileWriter(commentTxt)){
+            boardWriter.write("번호\t제목\t내용\t글쓴이\t작성일\t조회수\t댓글수\t추천수\t개념글여부\n");
             List<DcBoard> boards = scraped.getBoards();
-            boardWriter.write("번호\t제목\t내용\t글쓴이\t작성일\t조회수\t댓글수\t추천수\t개념글여부\n"); 
             for (DcBoard board : boards){
                 boardWriter.write(board.writeToString() + "\n");
             }
