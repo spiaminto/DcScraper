@@ -20,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.util.StopWatch;
 
+import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -290,7 +291,7 @@ public class DefaultDcScraper implements DcScraper {
                     // 댓글 개수 체크 (댓글돌이는 extractingBoard.getCommentCnt() 숫자에서 제외됨, 삭제된 댓글 갯수는 빼줘야됨)
                     if (extractingBoard.getCommentCnt() != extractedComments.size() - deletedCommentCount) {
                         log.warn("[COMMENT.PROPERLY] comment not extracted properly extractingBoard.getCommentCnt() = {} extractedComments.size() = {}, deletedCommentCount = {}, executeUrl={}", extractingBoard.getCommentCnt(), extractedComments.size(), deletedCommentCount, executeUrl);
-                        extractedComments.forEach(dcComment -> log.warn("dcComment = {}", dcComment));
+                        extractedComments.forEach(dcComment -> log.debug("dcComment = {}", dcComment));
                     }
 
                     // 글 하나만 하고 끝내기
@@ -298,9 +299,9 @@ public class DefaultDcScraper implements DcScraper {
 
                 } // for trElements
 
-                log.info("[PAGE END] pageNum = {}/{} resultBoards.size = {}",
-                        pageNum, maxPageNum, resultBoards.size());
-                log.info("addCommentCount = {}, addedBoardCommentCntTotal = {}, calculated expected = {}",
+                log.info("[PAGE END] pageNum = {}/{} resultBoards.size = {} resultComments.size = {}",
+                        pageNum, maxPageNum, resultBoards.size(), resultComments.size());
+                log.debug("addCommentCount = {}, addedBoardCommentCntTotal = {}, calculated expected = {}",
                         addedCommentCount, addedBoardCommentCntTotal, addedCommentCount - addedDeletedCommentCount);
                 // 다음 페이지로
                 pageNum++;
@@ -348,8 +349,10 @@ public class DefaultDcScraper implements DcScraper {
             String gallListOuterHtml = (String) gallList.evaluate("e => e.outerHTML");
             Element tableElement = Jsoup.parse(gallListOuterHtml);
             results = tableElement.select(boardListItemSelector);
+        } catch (TimeoutError e) {
+            log.debug("[TIMEOUT] openListPageAndParse();  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
         } catch (Exception e) {
-            log.error("[ERROR] webDriver.get(executeUrl);  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
+            log.debug("[ERROR] openListPageAndParse();  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
         }
         return results;
     }
@@ -377,8 +380,11 @@ public class DefaultDcScraper implements DcScraper {
 
             stopwatch.stop();
             log.debug("[STOPWATCH] get mainElement from page : stopwatch.elapsed = {}", stopwatch.getTotalTimeSeconds());
+        } catch (TimeoutError e) {
+            log.debug("[TIMEOUT] openViewPageAndParse();  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
+            result = null;
         } catch (Exception e) {
-            log.error("[ERROR] webDriver.get(executeUrl);  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
+            log.debug("[ERROR] openViewPageAndParse();  executeUrl = {} e.name = {} message = {}", executeUrl, e.getClass().getName(), e.getMessage());
             result = null;
         }
         return result;
