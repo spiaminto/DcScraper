@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.spiamint:DcScraper:1.0.11' 
+    implementation 'com.github.spiamint:DcScraper:1.0.12' 
 }
 ```
 pom.xml
@@ -27,7 +27,7 @@ pom.xml
 <dependency>
     <groupId>com.github.spiamint</groupId>
     <artifactId>DcScraper</artifactId>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
 </dependency>
 ```
 
