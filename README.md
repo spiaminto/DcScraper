@@ -31,6 +31,8 @@ pom.xml
 </dependency>
 ```
 
+첫 스크래핑 실행 시 Microsoft Playwright 라이브러리가 Chromium 브라우저를 'C:\Users\[사용자명]\AppData\Local\ms-playwright' 에 다운로드 합니다.
+
 ## 2. 스크래퍼
 #### 1.1 기본 스크래핑
 ```java

@@ -48,34 +48,6 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-// win32_x64 드라이버 제외한 모든 드라이버 제거 시작
-configurations {
-    runtimeClasspath {
-        canBeResolved = true
-    }
-}
-
-task bootJarWindowDriverOnly(type: Jar) {
-    archiveClassifier = 'win-driver-only'
-    from sourceSets.main.output
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-
-    exclude 'driver/linux/**'
-    exclude 'driver/linux-arm64/**'
-    exclude 'driver/mac/**'
-    exclude 'driver/mac-arm64/**'
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-artifacts {
-    archives bootJarWindowDriverOnly
-}
-// win32_x64 드라이버 제외한 모든 드라이버 제거 끝
-
 publishing {
     publications {
         mavenJava(MavenPublication) {

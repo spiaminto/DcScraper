@@ -46,16 +46,17 @@ public class DcComment {
     }
 
     /**
-     * 메모장 또는 엑셀 파일로 저장하기 위한 형식으로 변환합니다. (댓글번호,글번호,내용,글쓴이,작성일,답글여부,답글대상 댓글번호)
+     * 메모장 또는 엑셀 파일로 저장하기 위한 형식으로 변환합니다. (댓글번호,글번호,글쓴이,내용,작성일,답글여부,답글대상 댓글번호)<br>
+     * 구분자는 \t (탭) 입니다.
      * @return
      */
     public String writeToString() {
-        return commentNum + "," +
-                boardNum + "," +
-                getCleanContent() + "," +
-                writer + "," +
-                regDate + "," +
-                reply + "," +
+        return commentNum + "\t" +
+                boardNum + "\t" +
+                writer + "\t" +
+                getCleanContent() + "\t" +
+                regDate + "\t" +
+                reply + "\t" +
                 targetNum;
     }
 }
