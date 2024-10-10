@@ -120,18 +120,21 @@ ScrapingOption 스크래핑 옵션
                 this::writeToFile); 
     }
     public void writeToFile(DcBoardsAndComments scraped) {
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss")); // 현재 시간
+        // 파일명에 붙일 시간
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss"));
+        
         // 파일 생성
         File boardCsv = new File("c:\\scraper\\Board " + now + ".txt");
         File commentCsv = new File("c:\\scraper\\Comment " + now + ".txt");
+        
         // 파일에 글, 댓글 작성
         try(FileWriter boardWriter = new FileWriter(boardCsv); FileWriter commentWriter = new FileWriter(commentCsv)){
             List<DcBoard> boards = scraped.getBoards();
-            boardWriter.write("번호\t제목\t내용\t글쓴이\t작성일\t조회수\t댓글수\t추천수\t개념글여부\n"); // 맨 윗줄
+            boardWriter.write("번호\t제목\t내용\t글쓴이\t작성일\t조회수\t댓글수\t추천수\t개념글여부\n"); 
             for (DcBoard board : boards){
                 boardWriter.write(board.writeToString() + "\n");
-            }   
-            commentWriter.write("댓글번호\t글번호\t글쓴이\t내용\t작성일\t답글여부\t답글대상 댓글번호\n"); // 맨 윗줄
+            }
+            commentWriter.write("댓글번호\t글번호\t글쓴이\t내용\t작성일\t답글여부\t답글대상 댓글번호\n"); 
             List<DcComment> comments = scraped.getComments();
             for (DcComment comment : comments) {
                 commentWriter.write(comment.writeToString() + "\n");
