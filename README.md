@@ -42,6 +42,7 @@ pom.xml
     public void startTest() {
         DcBoardsAndComments scraped = dcScraper.start(
                 ScrapeRequest.of("github", GalleryType.MINOR, 1, 1)); // 갤러리ID, 갤러리 타입, 시작페이지, 끝페이지
+        
         scraped.getBoards().forEach(dcBoard -> log.info(dcBoard.cleanedToString())); // 스크래핑 된 글
         // DcBoard(boardNum=71100, title=c언어 강의 추천하는거 있나요?, cleanContent=예시문제 같은것도 있었음 좋겠는데 추천좀 해주세요, writer=거북이이, regDate=2024-10-07T18:50:17, viewCnt=36, commentCnt=4, recommendCnt=0, recommended=false) ... 
         
