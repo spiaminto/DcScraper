@@ -49,5 +49,21 @@ public class DcBoard {
                 ", recommended=" + recommended +
                 ')';
     }
+
+    /**
+     * 메모장 또는 엑셀 파일로 저장하기 위한 형식으로 변환합니다. (번호,제목,내용,글쓴이,작성일,조회수,댓글수,추천수,개념글여부)
+     * @return
+     */
+    public String writeToString() {
+        return boardNum + "," +
+                title + "," +
+                getCleanContent() + "," +
+                writer + "," +
+                regDate + "," +
+                viewCnt + "," +
+                commentCnt + "," +
+                recommendCnt + "," +
+                recommended;
+    }
 }
 
