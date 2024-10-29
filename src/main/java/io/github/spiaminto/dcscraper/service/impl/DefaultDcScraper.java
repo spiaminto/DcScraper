@@ -315,7 +315,7 @@ public class DefaultDcScraper implements DcScraper {
                 addedDeletedCommentCount = 0;
 
             }// for pageNum
-        } // try with resouce
+        } // try with resource
         return ScrapeResult.builder()
                 .dcBoardsAndComments(
                         new DcBoardsAndComments(resultBoards, resultComments))
